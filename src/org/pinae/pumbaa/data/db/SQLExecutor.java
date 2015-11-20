@@ -31,6 +31,8 @@ public class SQLExecutor {
 
 	private Connection conn = null;
 
+	private boolean isShowSql = false;
+	
 	/**
 	 * 构造函数
 	 */
@@ -53,7 +55,13 @@ public class SQLExecutor {
 			String url = properties.getProperty("url"); // JDBC连接地址
 			String user = properties.getProperty("user"); // JDBC连接用户
 			String password = properties.getProperty("password"); // JDBC密码
-
+			
+			try {
+				this.isShowSql = properties.contains("show_sql") ? Boolean.parseBoolean(properties.get("show_sql").toString()) : false;
+			} catch (Exception e) {
+				this.isShowSql = false;
+			}
+			
 			IOUtils.closeQuietly(in);
 
 			Class.forName(properties.getProperty("driver"));
@@ -101,6 +109,8 @@ public class SQLExecutor {
 			Statement stmt = null;
 
 			try {
+				showSql(sql);
+				
 				stmt = conn.createStatement();
 				List<Object[]> table = new ArrayList<Object[]>();
 
@@ -188,8 +198,9 @@ public class SQLExecutor {
 
 		boolean result = false;
 
+		showSql(sql);
+		
 		Statement stmt = null;
-
 		try {
 			stmt = conn.createStatement();
 			stmt.execute(sql);
@@ -231,6 +242,8 @@ public class SQLExecutor {
 			for (String sql : sqlList) {
 				if (StringUtils.isNotEmpty(sql)) {
 					sql = sql.trim();
+					showSql(sql);
+					
 					stmt.addBatch(sql);
 				}
 			}
@@ -259,6 +272,12 @@ public class SQLExecutor {
 			conn.close();
 		} catch (SQLException e) {
 			log.error(e.getMessage(), e);
+		}
+	}
+	
+	private void showSql(String sql) {
+		if (this.isShowSql) {
+			log.info(sql);
 		}
 	}
 }
