@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sqls>
+
+	<sql name="GET_ID">
+		select id from test
+	</sql>
+	
+	<sql name="GET_TEST">
+		select * from test where 1=1 and id = :id
+	</sql>
+	
+	<sql name="GET_TEST2">
+		select * from test where 1=1 and word = :word
+	</sql>
+	
+	<sql name="INSERT_DATA">
+		insert into test(id, name, age, phone) values (:id, :name, :age, :phone)
+	</sql>
+	
+</sqls>
