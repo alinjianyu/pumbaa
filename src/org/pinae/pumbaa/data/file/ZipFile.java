@@ -23,7 +23,7 @@ import org.apache.log4j.Logger;
 /**
  * ZIP文件处理
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  *
  */
 public class ZipFile {

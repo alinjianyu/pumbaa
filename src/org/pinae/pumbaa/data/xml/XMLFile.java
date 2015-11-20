@@ -6,9 +6,9 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.pinae.nala.xb.marshal.Marshaller;
-import org.pinae.nala.xb.marshal.XMLMarshaller;
+import org.pinae.nala.xb.marshal.XmlMarshaller;
 import org.pinae.nala.xb.unmarshal.Unmarshaller;
-import org.pinae.nala.xb.unmarshal.XMLUnmarshaller;
+import org.pinae.nala.xb.unmarshal.XmlUnmarshaller;
 import org.pinae.nala.xb.util.ResourceReader;
 import org.pinae.nala.xb.util.ResourceWriter;
 
@@ -16,7 +16,7 @@ import org.pinae.nala.xb.util.ResourceWriter;
 /**
  * XML文件工具
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  *
  */
 public class XMLFile {
@@ -33,7 +33,7 @@ public class XMLFile {
 	public Map<?, ?> read(String filename) {
 		Map<?, ?> xmlObject = new HashMap();
 		try {
-			Unmarshaller bind = new XMLUnmarshaller(new ResourceReader().getFileStream(filename));
+			Unmarshaller bind = new XmlUnmarshaller(new ResourceReader().getFileStream(filename));
 			bind.setRootClass(Map.class);
 			xmlObject = (Map<?, ?>)bind.unmarshal();
 		} catch (Exception e) {
@@ -66,7 +66,7 @@ public class XMLFile {
 	public StringBuffer marshal(Object xmlObject, String encoding) {
 		StringBuffer xml = new StringBuffer();
 		try {
-			Marshaller marshaller = new XMLMarshaller(xmlObject);
+			Marshaller marshaller = new XmlMarshaller(xmlObject);
 			marshaller.setDocumentStart(String.format("<?xml version='1.0' encoding='%s'?>", encoding));
 			marshaller.enablePrettyPrint(true);
 			marshaller.enableNodeMode(true);
@@ -92,7 +92,7 @@ public class XMLFile {
 	public Object unmarshal(String xml, String encoding, Class clazz) {
 		Object xmlObject = null;
 		try {
-			Unmarshaller bind = new XMLUnmarshaller(new ByteArrayInputStream(xml.getBytes(encoding)));
+			Unmarshaller bind = new XmlUnmarshaller(new ByteArrayInputStream(xml.getBytes(encoding)));
 			bind.setRootClass(clazz);
 			xmlObject = (Map<?, ?>)bind.unmarshal();
 		} catch (Exception e) {

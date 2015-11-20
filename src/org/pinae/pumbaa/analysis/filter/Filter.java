@@ -5,7 +5,7 @@ package org.pinae.pumbaa.analysis.filter;
 /**
  * 数据过滤器
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  *
  */
 public interface Filter {

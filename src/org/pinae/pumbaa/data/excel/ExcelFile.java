@@ -29,7 +29,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 /**
  * Excel文件工具
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  * 
  */
 public class ExcelFile {

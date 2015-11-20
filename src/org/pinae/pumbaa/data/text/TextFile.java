@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -17,7 +18,7 @@ import org.pinae.pumbaa.data.file.FileTools;
 /**
  * 文本文件工具
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  * 
  */
 public class TextFile {
@@ -121,7 +122,7 @@ public class TextFile {
 	 * @param encoding 文件编码
 	 * @param content 需要写入的内容列表
 	 */
-	public void write(String filename, String encoding, List<String> content) {
+	public void write(String filename, String encoding, Collection<String> content) {
 		try {
 			write(filename, encoding, content, false);
 		} catch (IOException e) {
@@ -137,7 +138,7 @@ public class TextFile {
 	 * @param content 需要写入的内容列表
 	 * @param append 采用追加模式写入
 	 */
-	public void write(String filename, String encoding, List<String> content,
+	public void write(String filename, String encoding, Collection<String> content,
 			boolean append) throws IOException {
 		FileOutputStream fos = null;
 		OutputStreamWriter osr = null;
@@ -201,6 +202,9 @@ public class TextFile {
 					splitFileCount++;
 				}
 			}
+			if (content.size() > 0) {
+				write(path + File.separator + name + "_" + Long.toString(splitFileCount) + "." + extFilename, encoding, content);
+			}
 		} catch (IOException e) {
 
 		} finally {
@@ -227,7 +231,7 @@ public class TextFile {
 	 * @param encoding 合并的文件编码
 	 * @param fileList 需要合并的文件列表
 	 */
-	public void join(String filename, String encoding, List<String> fileList) {
+	public void join(String filename, String encoding, Collection<String> fileList) {
 		List<String> result = new ArrayList<String>();
 
 		for (String file : fileList) {
@@ -246,7 +250,7 @@ public class TextFile {
 	 * @param encoding 文件编码
 	 * @param filteList 需要过滤的内容（过滤内容将从文件中删去）
 	 */
-	public void filte(String filename, String encoding, List<String> filteList) {
+	public void filte(String filename, String encoding, Collection<String> filteList) {
 		List<String> content = new ArrayList<String>();
 
 		open(filename, encoding);
@@ -283,7 +287,7 @@ public class TextFile {
 	 * 
 	 * @return 文件匹配内容的行数
 	 */
-	public List<Long> locate(String filename, String encoding, List<String> filteList) {
+	public List<Long> locate(String filename, String encoding, Collection<String> filteList) {
 		List<Long> locateList = new ArrayList<Long>();
 		
 		open(filename, encoding);

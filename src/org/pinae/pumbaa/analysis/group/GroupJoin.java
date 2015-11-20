@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * 值拼接聚合
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  *
  */
 public class GroupJoin implements Group {

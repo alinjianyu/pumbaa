@@ -11,7 +11,7 @@ import org.pinae.pumbaa.util.MessageDigestUtils;
  * 
  * 如果每条数据为数组，那么可以忽略某些字段，然后将其余的字段进行合并然后Hash运算后，相同Hash值的进行合并
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  *
  */
 public class ArrayHashMerger implements Merger {

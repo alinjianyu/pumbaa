@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
 /**
  * 对文本消息进行正则表达式映射
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  *
  *
  */

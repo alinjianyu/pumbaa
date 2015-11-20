@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * 操作配置
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  *
  */
 public class Operate {

@@ -1,5 +1,6 @@
 package test.org.pinae.pumbaa.data.text;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -11,20 +12,19 @@ import org.pinae.pumbaa.data.text.TextFile;
 public class TextFileTest {
 
 	
-	//@Test
+	@Test
 	public void testSplit(){
 		TextFile txtFile = new TextFile();
+		List<String> filelist = FileTools.getFileList("d:\\TestData\\orgnialLog\\201501");
 			
-		List<String> filelist = FileTools.getFileList("d:\\TestData\\orgnialLog\\201502");
-			
-		//new File("d:\\TestData\\formatLog\\201411").mkdir();
+		new File("d:\\TestData\\formatLog\\201501").mkdir();
 			
 		for (String file : filelist) {
-			txtFile.split(file, "GBK", String.format("d:\\TestData\\formatLog\\201502"), "log", 10000);
+			txtFile.split(file, "UTF8", String.format("d:\\TestData\\formatLog\\201501"), "log", 10000);
 		}
 	}
 	
-	//@Test
+	@Test
 	public void testFilte(){
 		TextFile txtFile = new TextFile();
 		
@@ -47,10 +47,10 @@ public class TextFileTest {
 		filteList.add(".*------.*-----.*");
 		
 		
-		List<String> filelist = FileTools.getFileList("D:\\TestData\\formatLog\\201502");
+		List<String> filelist = FileTools.getFileList("D:\\TestData\\formatLog\\201501");
 		for (String file : filelist) {
 			System.out.println(file);
-			txtFile.filte(file, "GBK", filteList);
+			txtFile.filte(file, "UTF8", filteList);
 		}
 		
 	}
@@ -61,7 +61,7 @@ public class TextFileTest {
 		txtFile.join("d:\\7.log", "GBK", "D:\\TestData\\log2");
 	}
 	
-	//@Test
+	@Test
 	public void testRebuild(){
 		TextFile txtFile = new TextFile();
 		List<String> filelist = FileTools.getFileList("D:\\TestData\\formatLog\\201502");

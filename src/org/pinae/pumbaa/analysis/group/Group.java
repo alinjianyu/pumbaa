@@ -3,7 +3,7 @@ package org.pinae.pumbaa.analysis.group;
 /**
  * 数据聚合
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  *
  */
 public interface Group {

@@ -39,7 +39,7 @@ public class ExcelFileTest {
 		List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
 		
 		Map<String, Object> row1 = new HashMap<String, Object>();
-		row1.put("name", "huiyugeng");
+		row1.put("name", "Linjianyu");
 		row1.put("age", 30);
 		data.add(row1);
 		

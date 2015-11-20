@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * 数据归并
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  *
  */
 public interface Merger {

@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * 对文本消息进行分割后映射
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  *
  */
 public class SplitMapping implements Mapping {

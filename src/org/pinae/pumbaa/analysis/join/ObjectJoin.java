@@ -1,18 +1,13 @@
 package org.pinae.pumbaa.analysis.join;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * 对象合并
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  *
  */
 public class ObjectJoin extends Join{

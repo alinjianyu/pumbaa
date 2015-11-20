@@ -5,7 +5,7 @@ package org.pinae.pumbaa.analysis.replace;
 /**
  * 数据替换
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  *
  */
 public interface Replace {

@@ -8,9 +8,9 @@ import org.pinae.pumbaa.util.MessageDigestUtils;
 /**
  * 字符串Hash归并
  * 
- * 对每条数据建立Hash值（MD5），相同Hash值得进行合并
+ * 对每条数据建立Hash值(MD5)，相同Hash值得进行合并
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  *
  */
 public class HashMerger implements Merger{

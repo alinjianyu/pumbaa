@@ -24,7 +24,7 @@ import org.pinae.pumbaa.analysis.join.ObjectJoin;
 import org.pinae.pumbaa.analysis.mapping.Mapping;
 import org.pinae.pumbaa.analysis.mapping.RegexMapping;
 import org.pinae.pumbaa.analysis.mapping.SplitMapping;
-import org.pinae.pumbaa.analysis.replace.DictReplace;
+import org.pinae.pumbaa.analysis.replace.ReplaceEach;
 import org.pinae.pumbaa.analysis.replace.Replace;
 
 public class Analysis {
@@ -93,7 +93,7 @@ public class Analysis {
 				Object pattern = operate.getParameterByName("pattern");
 				
 				if (pattern != null && pattern instanceof Map) {
-					replace = new DictReplace((Map<String, String>)pattern);
+					replace = new ReplaceEach((Map<String, String>)pattern);
 				}
 			}
 
@@ -177,10 +177,8 @@ public class Analysis {
         Map<String, int[]> columnpMap = new HashMap<String, int[]>();
         for (Operate operate : operateList) {
         	
-        	String[] columns = operate.hasParameter(Group.ALL_COLUMNS, String[].class) ? 
-        			(String[])operate.getParameterByName(Group.ALL_COLUMNS) : null;
-        	String[] groupColumns = operate.hasParameter(Group.GROUP_COLUMNS, String[].class) ?
-        			(String[])operate.getParameterByName(Group.GROUP_COLUMNS) : null;
+        	String[] columns = operate.hasParameter("columns", String[].class) ? (String[])operate.getParameterByName("columns") : null;
+        	String[] groupColumns = operate.hasParameter("group", String[].class) ? (String[])operate.getParameterByName("group") : null;
         	
         	//获取需要聚合的列在全部列中的index值
     		int columnIndex[] = new int[groupColumns.length];
@@ -200,13 +198,13 @@ public class Analysis {
     		String opt = operate.getOperate();
     		
     		Group group = null;
-    		if (StringUtils.equalsIgnoreCase(opt, Group.GROUP_COUNT)) {
+    		if (StringUtils.equalsIgnoreCase(opt, "group-count")) {
     			group = new GroupCount();
-    		} else if (StringUtils.equalsIgnoreCase(opt, Group.GROUP_JOIN)){
+    		} else if (StringUtils.equalsIgnoreCase(opt, "group-join")){
     			group = new GroupJoin();
-    		} else if (StringUtils.equalsIgnoreCase(opt, Group.GROUP_SUM)){
+    		} else if (StringUtils.equalsIgnoreCase(opt, "group-sum")){
     			group = new GroupSum();
-    		} else if (StringUtils.equalsIgnoreCase(opt, Group.GROUP_FILTE)){
+    		} else if (StringUtils.equalsIgnoreCase(opt, "group-sum")){
     			group = new GroupFilter();
     		}else {
     			continue;
@@ -220,7 +218,7 @@ public class Analysis {
         			groupMap.put(name, group);
         		}
         		
-        		Object convert = operate.getParameterByName(Group.DATA_CONVERT);
+        		Object convert = operate.getParameterByName("convert");
         		if (convert != null && convert instanceof DataConvert) {
         			convertMap.put(name, (DataConvert)convert);
         		}

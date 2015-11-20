@@ -3,7 +3,7 @@ package org.pinae.pumbaa.analysis;
 /**
  * 值转换
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  *
  */
 public interface DataConvert {

@@ -13,7 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.pinae.pumbaa.analysis.Analysis;
 import org.pinae.pumbaa.analysis.Operate;
-import org.pinae.pumbaa.analysis.group.Group;
 import org.pinae.pumbaa.data.text.TextFile;
 
 public class AnalysisTest {
@@ -51,10 +50,10 @@ public class AnalysisTest {
 		String columns[] = {"RETDATA", "请求流水号", "接入时间", "返回时间", "处理时长", "号码", "接口业务标识", "渠道", "操作员",
     			"返回码", "返回信息", "入参", "出参"};
 
-		Operate operate = new Operate("Time-Group", Group.GROUP_COUNT);
-		operate.addParameter(Group.ALL_COLUMNS, columns);
-		operate.addParameter(Group.GROUP_COLUMNS, new String[]{"RETDATA", "接口业务标识"});
-		operate.addParameter(Group.DATA_CONVERT, new WASDataConvertByHour());
+		Operate operate = new Operate("Time-Group", "group-count");
+		operate.addParameter("columns", columns);
+		operate.addParameter("group", new String[]{"RETDATA", "接口业务标识"});
+		operate.addParameter("convert", new WASDataConvertByHour());
 		
 		List<Operate> operateList = new ArrayList<Operate>();
 		operateList.add(operate);

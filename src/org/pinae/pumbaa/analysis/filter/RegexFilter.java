@@ -13,7 +13,7 @@ import org.wltea.expression.datameta.Variable;
 /**
  * 正则表达过滤
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  *
  */
 public class RegexFilter implements Filter{

@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * 统计聚合
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  *
  */
 public class GroupCount implements Group {

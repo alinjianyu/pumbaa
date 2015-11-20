@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * 字典过滤
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  *
  */
 public class DictFilter implements Filter {

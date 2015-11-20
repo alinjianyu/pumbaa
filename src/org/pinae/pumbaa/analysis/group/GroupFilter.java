@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * 过滤聚合
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  *
  */
 public class GroupFilter implements Group {

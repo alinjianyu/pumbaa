@@ -6,11 +6,48 @@
 	</sql>
 	
 	<sql name="GET_TEST">
-		select * from test where 1=1 and id = :id
+		select * from test where 1=1 
+		<choose when="id">
+			and id = :id
+		</choose>
 	</sql>
 	
 	<sql name="GET_TEST2">
-		select * from test where 1=1 and word = :word
+		select * from test where 1=1 {id} {name} {order}
+		<choose when="id" statement="id">
+			and id = :id
+		</choose>
+		<choose when="name">
+			and name = :name
+		</choose>
+		<choose when="id" statement="order">
+			order by id
+		</choose>
+	</sql>
+	
+	<sql name="SUB1">
+		select name from USER1
+		<choose when="id">
+			where id = :id
+		</choose>
+	</sql>
+	
+	<sql name="SUB2">
+		select name from USER2 {order}
+		<choose when="id" statement="order">
+			order by id
+		</choose>
+	</sql>
+	
+	<sql name="SUB3">
+		select name from (${SUB1}) t1 union select name from (${SUB2}) t2
+	</sql>
+	
+	<sql name="GET_TEST3">
+		select name from (${SUB3}) t {order}
+		<choose when="id" statement="order">
+			order by id
+		</choose>
 	</sql>
 	
 	<sql name="INSERT_DATA">

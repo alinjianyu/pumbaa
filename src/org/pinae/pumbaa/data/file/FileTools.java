@@ -2,8 +2,10 @@ package org.pinae.pumbaa.data.file;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * 文件处理工具
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  * 
  */
 public class FileTools {
@@ -99,19 +101,102 @@ public class FileTools {
 	 */
 	public static boolean deleteFileSet(Collection<String> filenames) {
 		boolean result = true;
-		for (String filename : filenames) {
+		if (filenames != null) {
+			for (String filename : filenames) {
+				try {
+					File file = new File(filename);
+					if (file.exists()) {
+						if (file.isFile()) {
+	
+							FileUtils.forceDelete(file);
+	
+						} else if (file.isDirectory()) {
+							FileUtils.deleteDirectory(file);
+						}
+					}
+				} catch (IOException e) {
+					return false;
+				}
+			}
+		} else {
+			result = false;
+		}
+		return result;
+	}
+	
+	/**
+	 * 重命名文件集合
+	 * 
+	 * @param filenames 文件名列表
+	 * @param pattern 文件名命名规范
+	 * 					{count}代表文件计数器
+	 * 					{date}代表当前日期, yyyy-MM-dd
+	 * 					{time}代表当前时间, HH-mm-ss
+	 *					{timestamp}代表当前时间戳
+	 *
+	 * @return 是否重命名成功
+	 */
+	public static boolean renameFileSet(Collection<String> filenames, String pattern) {
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat timeFormat = new SimpleDateFormat("HH-mm-ss");
+		
+		boolean result = false;
+		if (filenames != null && pattern != null) {
+			long count = 1;
 			try {
-				File file = new File(filename);
-				if (file.exists()) {
-					if (file.isFile()) {
-
-						FileUtils.forceDelete(file);
-
-					} else if (file.isDirectory()) {
-						FileUtils.deleteDirectory(file);
+				for (String filename : filenames) {
+					if (StringUtils.isNotEmpty(filename)) {
+						File file = new File(filename);
+						if (file.isFile()) {
+							String path = file.getParent();
+							Date now = new Date();
+							
+							String newFilename = pattern;
+							newFilename = newFilename.replaceAll("\\{count\\}", Long.toString(count));
+							newFilename = newFilename.replaceAll("\\{date\\}", dateFormat.format(now));
+							newFilename = newFilename.replaceAll("\\{time\\}", timeFormat.format(now));
+							newFilename = newFilename.replaceAll("\\{timestamp\\}", Long.toString(now.getTime()));
+							
+							File newFile = new File(path + File.separator + newFilename);
+							result = file.renameTo(newFile);
+						}
+					}
+					count++;
+				}
+			} catch (Exception e) {
+				return false;
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * 拷贝文件集合
+	 * 
+	 * @param filenames 文件名列表
+	 * @param destPath 目标目录
+	 * 
+	 * @return 是否拷贝成功
+	 */
+	public static boolean copyFileSet(Collection<String> filenames, String destPath) {
+		boolean result = false;
+		if (filenames != null && StringUtils.isNotEmpty(destPath)) {
+			try {
+				File destDir = new File(destPath);
+				if (destDir.isDirectory()) {
+					for (String filename : filenames) {
+						if (StringUtils.isNotEmpty(filename)) {
+							File srcFile = new File(filename);
+							if (srcFile.isFile()) {
+								FileUtils.copyFileToDirectory(srcFile, destDir);
+							} else if (srcFile.isDirectory()) {
+								FileUtils.copyDirectory(srcFile, destDir);
+							}
+						}
 					}
 				}
-			} catch (IOException e) {
+			} catch (Exception e) {
 				return false;
 			}
 		}

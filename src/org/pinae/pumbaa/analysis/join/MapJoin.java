@@ -9,12 +9,12 @@ import java.util.Set;
 /**
  * Map合并
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  *
  */
 public class MapJoin extends Join {
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings("unchecked")
 	@Override
 	public Object join(Object src, Object dst) {
 		
@@ -32,16 +32,17 @@ public class MapJoin extends Join {
 				Object srcValue = srcMap.get(dstKey);
 				if (dstValue != null){
 					if (srcValue != null){
+						List<Object> valueList = null;
+						
 						if (srcValue instanceof List){
-							((List)srcValue).add(dstValue);
-							srcMap.put(dstKey, srcValue);
+							valueList = (List<Object>)srcValue;
+							valueList.add(dstValue);
 						} else {
-							List<Object> valueList = new ArrayList<Object>();
+							valueList = new ArrayList<Object>();
 							valueList.add(srcValue);
 							valueList.add(dstValue);
-							
-							srcMap.put(dstKey, valueList);
 						}
+						srcMap.put(dstKey, valueList);
 					} else {
 						srcMap.put(dstKey, dstValue);
 					}

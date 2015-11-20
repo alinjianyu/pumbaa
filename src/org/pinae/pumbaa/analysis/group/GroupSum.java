@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * 累加聚合
  * 
- * @author Huiyugeng
+ * @author Linjianyu
  *
  */
 public class GroupSum implements Group {
